@@ -77,3 +77,28 @@ In total I trained 5 models:
        ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
      - Confusion matrix:
        ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
+
+## Solver
+
+Solver is relatively simple and is found in `main.py` as `evaluate_expression`.
+The idea is to use two stacks, one is for operators and one is for number values.
+
+We iterate through expression and store numbers into value stack.
+When we get to an operator, we check if he has precedence over other operators in stack.
+
+When we get to the end of the expression, apply remaining operators and the solution is the only value left in the value stack.
+
+## Usage
+
+This project is really simple to setup and use:
+
+- Clone the repo
+- Run the script using `python main.py path/to/image_containing expression`
+
+I commited an example image to this repo:
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test.jpeg?raw=true)
+
+and after running `python main.py test.jpeg`, the output is:
+
+Decoded expression: 5x(12+3)-1123/7x61
+Calculated expression: -5211.142857142856
