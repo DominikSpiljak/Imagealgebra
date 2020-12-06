@@ -38,7 +38,7 @@ def evaluate_expression(expression):
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
         '/': lambda x, y: x / y,
-        '*': lambda x, y: x * y
+        'x': lambda x, y: x * y
     }
     operator_stack = Stack()
     value_stack = Stack()
@@ -86,14 +86,13 @@ def evaluate_expression(expression):
 
 def main():
     from keras.models import load_model
-    model = load_model("models/lenet_25epochs.h5")
+    model = load_model('models/lenet_25epochs_small_extended.h5')
 
     img = utils.load_and_process_image('test.jpeg')
     bounding_boxes = sorted(
         utils.find_unique_contours(img), key=lambda x: x[0])
     cropped_boxes = [utils.crop_bounding_box(
         img, bounding) for bounding in bounding_boxes]
-
     X = np.array([cv.resize(cropped, (30, 30)).reshape(30, 30, 1)
                   for cropped in cropped_boxes])
 

@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+import matplotlib as plt
 
 
 def load_and_process_image(path):
@@ -61,8 +62,13 @@ def crop_bounding_box(image, bounding_box):
 def vectorize(path):
     img = load_and_process_image(path)
     contours, _ = find_contours(img)
-    # In case of multiple contours, take one with the biggest area
-    bounding_box = cv.boundingRect(sorted(contours, key=cv.contourArea)[-1])
+    try:
+        # In case of multiple contours, take one with the biggest area
+        bounding_box = cv.boundingRect(sorted(contours, key=cv.contourArea)[-1])
+    except IndexError:
+        plt.imshow(img)
+        plt.show()
+        raise
     img = crop_bounding_box(img, bounding_box)
     img = cv.resize(img, (30, 30))
     img = img.reshape(30, 30, 1)

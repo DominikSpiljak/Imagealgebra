@@ -134,4 +134,6 @@ dataset/*
 *.npz
 *.txt
 *.pdf
-
+*MNIST*
+*handwritten*
+*dataset*
