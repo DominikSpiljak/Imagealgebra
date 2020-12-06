@@ -19,7 +19,7 @@ Also, we resize the cropped photo to **30x30** pixels.
 
 ### Dataset
 
-First off, I took this dataset: https://www.kaggle.com/xainano/handwrittenmathsymbols and thought:
+First off, I took this dataset: https://www.kaggle.com/xainano/handwrittenmathsymbols and created the initial dataset and thought:
 
 > Oh wow, this will be easy
 
@@ -29,3 +29,91 @@ Also, the dataset is pretty wild.
 This is a number 8:
 
 ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/8_15575.jpg?raw=true)
+
+And it's not even the worst one.
+Then I hand-picked 200 images for each class and created a smaller dataset.
+
+Also, I came across: https://www.kaggle.com/clarencezhao/handwritten-math-symbol-dataset and extended the smaller dataset to get the final dataset.
+I also considered to add MNIST dataset but the current one prove to be okay.
+
+**Important note**: This is far from good, the dataset needs a lot of work and images from different sources. This is just proof of concept so anything that works most of the time is good.
+
+### Model and training
+
+Since the problem isn't too complex, I decided to use a popular Convolutional Neural Network called LeNet-5.
+
+It's relatively simple:
+
+Model: "sequential"
+
+---
+
+# Layer (type) Output Shape Param #
+
+conv2d (Conv2D) (None, 26, 26, 6) 156
+
+---
+
+average_pooling2d (AveragePo (None, 13, 13, 6) 0
+
+---
+
+conv2d_1 (Conv2D) (None, 9, 9, 16) 2416
+
+---
+
+average_pooling2d_1 (Average (None, 4, 4, 16) 0
+
+---
+
+flatten (Flatten) (None, 256) 0
+
+---
+
+dense (Dense) (None, 128) 32896
+
+---
+
+dense_1 (Dense) (None, 64) 8256
+
+---
+
+# dense_2 (Dense) (None, 16) 1040
+
+Total params: 44,764
+Trainable params: 44,764
+Non-trainable params: 0
+
+---
+
+If you want to read more about this model, check out: http://yann.lecun.com/exdb/lenet/
+
+In total I trained 5 models:
+
+1. `lenet_25epochs.h5`
+
+   - This model is trained **only** on the initial big dataset and achieved around 98% accuracy during evaluation but was really bad on real-life problems.
+
+2. `lenet_10epochs_small.h5`
+
+   - This model is trained on hand-picked 200 images-per-class dataset. It achieved around 96% accuracy during evaluation but was also really bad on real-life problems.
+
+3. `lenet_25epochs_small.h5`
+
+   - Same data as the 2. one but trained over 25 epochs. Same results as the one above.
+
+4. `lenet_25epochs_weighted.h5`
+
+   - Same data and number of epochs as 1. one but I added class weights because of the class imbalance. Same results as the first one.
+
+5. `lenet_25epochs_small_extended.h5`
+   - Trained on the final dataset, hence the extended in the name. I will provide full evaluation results for this one since it's currently the model I use in the main script:
+     - Training loss:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/loss.png?raw=true)
+     - Training accuracy:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/accuracy.png?raw=true)
+     - Test accuracy: 0.930752453653217
+     - Test F1 score, recall and precision over classes:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
+     - Confusion matrix:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
