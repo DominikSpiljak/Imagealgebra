@@ -2,9 +2,18 @@ import os
 import cv2 as cv
 import numpy as np
 import utils.image_processing as utils
+import argparse
 
 # Silence TensorFlow log
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description='Program for recognising and solving algebraic expressions')
+    parser.add_argument('image', help='image containing algebraic expression')
+    args = parser.parse_args()
+    return args
 
 
 class Stack:
@@ -101,11 +110,15 @@ def evaluate_expression(expression):
 
 
 def main():
+
+    args = parse_args()
+
+    # Find characters in the image and vectorize them
+    img = utils.load_and_process_image(args.image)
+
     from keras.models import load_model
     model = load_model('models/lenet_25epochs_small_extended.h5')
 
-    # Find characters in the image and vectorize them
-    img = utils.load_and_process_image('test.jpeg')
     # Sort bounding boxes by its x coordinate assuming that equation is written in one line
     bounding_boxes = sorted(
         utils.find_unique_contours(img), key=lambda x: x[0])
