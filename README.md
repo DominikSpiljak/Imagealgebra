@@ -101,4 +101,5 @@ I commited an example image to this repo:
 and after running `python main.py test.jpeg`, the output is:
 
 Decoded expression: 5x(12+3)-1123/7x61
+
 Calculated expression: -5211.142857142856
