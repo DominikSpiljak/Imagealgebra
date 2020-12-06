@@ -44,47 +44,7 @@ Since the problem isn't too complex, I decided to use a popular Convolutional Ne
 
 It's relatively simple:
 
-Model: "sequential"
-
----
-
-# Layer (type) Output Shape Param #
-
-conv2d (Conv2D) (None, 26, 26, 6) 156
-
----
-
-average_pooling2d (AveragePo (None, 13, 13, 6) 0
-
----
-
-conv2d_1 (Conv2D) (None, 9, 9, 16) 2416
-
----
-
-average_pooling2d_1 (Average (None, 4, 4, 16) 0
-
----
-
-flatten (Flatten) (None, 256) 0
-
----
-
-dense (Dense) (None, 128) 32896
-
----
-
-dense_1 (Dense) (None, 64) 8256
-
----
-
-# dense_2 (Dense) (None, 16) 1040
-
-Total params: 44,764
-Trainable params: 44,764
-Non-trainable params: 0
-
----
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/model.png?raw=true)
 
 If you want to read more about this model, check out: http://yann.lecun.com/exdb/lenet/
 
