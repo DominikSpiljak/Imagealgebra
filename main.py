@@ -2,7 +2,6 @@ import os
 import cv2 as cv
 import numpy as np
 import utils.image_processing as utils
-import matplotlib.pyplot as plt
 
 # Silence TensorFlow log
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -25,6 +24,15 @@ class Stack:
 
 
 def hasPrecedence(operator1, operator2):
+    """Checks if operator2 has precedence over operator1
+
+    Args:
+        operator1 (str): first operator
+        operator2 (str): second operator
+
+    Returns:
+        (bool): true if operator2 has precedence over operator1 else false
+    """
     if operator2 == '(' or operator2 == ')':
         return False
     elif (operator1 == '*' or operator1 == '/') and (operator2 == '+' or operator2 == '-'):
@@ -34,6 +42,14 @@ def hasPrecedence(operator1, operator2):
 
 
 def evaluate_expression(expression):
+    """Evaluates math expression
+
+    Args:
+        expression (string): Math expression
+
+    Returns:
+        int: solution
+    """
     operator_map = {
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
@@ -88,7 +104,9 @@ def main():
     from keras.models import load_model
     model = load_model('models/lenet_25epochs_small_extended.h5')
 
+    # Find characters in the image and vectorize them
     img = utils.load_and_process_image('test.jpeg')
+    # Sort bounding boxes by its x coordinate assuming that equation is written in one line
     bounding_boxes = sorted(
         utils.find_unique_contours(img), key=lambda x: x[0])
     cropped_boxes = [utils.crop_bounding_box(
@@ -96,8 +114,10 @@ def main():
     X = np.array([cv.resize(cropped, (30, 30)).reshape(30, 30, 1)
                   for cropped in cropped_boxes])
 
+    # Get model predictions for all characters
     preds = np.argmax(model.predict(X), axis=1)
 
+    # labels -> character
     inverse_label_map = {
         10: '+',
         11: '-',
@@ -107,6 +127,7 @@ def main():
         15: ')'
     }
 
+    # Map predicted values to a string containing expression
     expression = "".join([str(pred) if pred < 10 else inverse_label_map[pred]
                           for pred in preds])
 

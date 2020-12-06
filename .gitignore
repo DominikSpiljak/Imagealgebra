@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 
-#Others...
+# Others...
 dataset/*
 *.npz
 *.txt
