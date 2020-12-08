@@ -130,7 +130,8 @@ dmypy.json
 
 
 # Others...
-*.npz
+data.npz
+small_data.npz
 *.txt
 *.pdf
 *MNIST*
