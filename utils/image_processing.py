@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-import matplotlib as plt
 
 
 def load_and_process_image(path):
@@ -117,22 +116,10 @@ def vectorize(path):
     """
     img = load_and_process_image(path)
     contours, _ = find_contours(img)
-    try:
-        # In case of multiple contours, take one with the biggest area
-        bounding_box = cv.boundingRect(
-            sorted(contours, key=cv.contourArea)[-1])
-    except IndexError:
-        plt.imshow(img)
-        plt.show()
-        raise
+    # In case of multiple contours, take one with the biggest area
+    bounding_box = cv.boundingRect(
+        sorted(contours, key=cv.contourArea)[-1])
     img = crop_bounding_box(img, bounding_box)
     img = cv.resize(img, (30, 30))
     img = img.reshape(30, 30, 1)
     return img
-
-
-if __name__ == "__main__":
-    x1, y1, width1, height1 = (62, 59, 135, 363)
-    x2, y2, width2, height2 = (181, 76, 3, 3)
-    print(overlapping_axes(x1, width1, x2, width2),
-          overlapping_axes(y1, height1, y2, height2))
