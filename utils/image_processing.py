@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 
-def load_and_process_image(path):
+def load_and_process_image(image):
     """Loads, turns grayscales image and inverts the colors
 
     Args:
@@ -12,7 +12,9 @@ def load_and_process_image(path):
         np.ndarray: np.ndarray representation of the image
     """
     threshold = 190
-    img = cv.imread(path)
+    img = image
+    if type(image) == str:
+        img = cv.imread(image)
     img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     img_invert = cv.bitwise_not(img_gray)
     less_than_threshold = np.less(img_invert, threshold)

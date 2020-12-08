@@ -1,7 +1,7 @@
 import os
 import cv2 as cv
 import numpy as np
-import image_processing as utils
+import utils.image_processing as utils
 import matplotlib.pyplot as plt
 import argparse
 
@@ -114,7 +114,7 @@ def evaluate_expression(expression):
 def decode_and_calculate(image, model):
 
     # Find characters in the image and vectorize them
-    img = utils.load_and_process_image(args.image)
+    img = utils.load_and_process_image(image)
 
     # Sort bounding boxes by its x coordinate assuming that equation is written in one line
     bounding_boxes = sorted(
@@ -140,8 +140,10 @@ def decode_and_calculate(image, model):
     # Map predicted values to a string containing expression
     expression = "".join([str(pred) if pred < 10 else inverse_label_map[pred]
                           for pred in preds])
-
-    return expression, evaluate_expression(expression)
+    try:
+        return expression, evaluate_expression(expression)
+    except:
+        return expression, "Couldn't calculate expression."
 
 
 if __name__ == "__main__":

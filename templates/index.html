@@ -1,0 +1,40 @@
+<html>
+  <center>
+    <head style="background-color: black">
+      <title>ImageAlgebra</title>
+
+      <h1 style="color: white">ImageAlgebra</h1>
+
+      <h3 style="color: white">
+        Model is very sensitive, please, make all symbols bolded, make sure
+      </h3>
+      <h3 style="color: white">
+        there is enough light and make sure symbols are dark and background is
+        white
+      </h3>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+      />
+    </head>
+
+    <body style="background-color: black">
+      <div id="camera">
+        <img src="{{ url_for('video_feed') }}" alt="video feed" />
+      </div>
+      <div id="btns-div">
+        <a href="{{ url_for('capture') }}">
+          <img alt="take picture" style="color: white" class="btn" />
+        </a>
+      </div>
+      <h4 style="color: white">
+        Expression is {{expression or 'not yet decoded'}} Calculated:
+        {{calculated or 'not yet calculated'}}
+      </h4>
+    </body>
+  </center>
+</html>

@@ -110,7 +110,7 @@ When we get to the end of the expression, apply remaining operators and the solu
 This project is really simple to setup and use:
 
 - Clone the repo
-- Run the script using `python main.py path/to/image_containing expression`
+- Run the script using `python utils/decode_and_calculate.py path/to/image_containing expression`
 
 I commited an some example images to this repo:
 
@@ -120,19 +120,19 @@ I commited an some example images to this repo:
 
 ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test3.png?raw=true)
 
-and after running `python main.py test1.jpg`, the output is:
+and after running `python utils/decode_and_calculate.py test1.jpg`, the output is:
 
 Decoded expression: 87+95
 
 Calculated expression: 182
 
-`python main.py test2.jpg`:
+`python utils/decode_and_calculate.py test2.jpg`:
 
 Decoded expression: 87+95
 
 Calculated expression: 182
 
-`python main.py test3.png`:
+`python utils/decode_and_calculate.py test3.png`:
 
 Decoded expression: 7x(8/11)
 
