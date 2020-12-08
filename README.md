@@ -118,7 +118,7 @@ I commited an some example images to this repo:
 
 ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test2.jpg?raw=true)
 
-![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test3.jpg?raw=true)
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test3.png?raw=true)
 
 and after running `python main.py test1.jpg`, the output is:
 
