@@ -130,10 +130,10 @@ dmypy.json
 
 
 # Others...
-dataset/*
 *.npz
 *.txt
 *.pdf
 *MNIST*
 *handwritten*
 *dataset*
+*vscode*

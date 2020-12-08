@@ -12,9 +12,12 @@ def load_and_process_image(path):
     Returns:
         np.ndarray: np.ndarray representation of the image
     """
+    threshold = 190
     img = cv.imread(path)
     img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     img_invert = cv.bitwise_not(img_gray)
+    less_than_threshold = np.less(img_invert, threshold)
+    img_invert[less_than_threshold] = 0
     return img_invert
 
 

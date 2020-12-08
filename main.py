@@ -2,6 +2,7 @@ import os
 import cv2 as cv
 import numpy as np
 import utils.image_processing as utils
+import matplotlib.pyplot as plt
 import argparse
 
 # Silence TensorFlow log
@@ -115,9 +116,9 @@ def main():
 
     # Find characters in the image and vectorize them
     img = utils.load_and_process_image(args.image)
-
     from keras.models import load_model
-    model = load_model('models/lenet_25epochs_small_extended.h5')
+    model = load_model(
+        'models/lenet_15epochs_weighted_small_extended_refined.h5')
 
     # Sort bounding boxes by its x coordinate assuming that equation is written in one line
     bounding_boxes = sorted(

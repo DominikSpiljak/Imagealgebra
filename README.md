@@ -8,6 +8,7 @@ All functionality for this section is written in `utils/image_processing`.
 
 First off, we need to load the image and do a little bit of processing using `load_and_process_image` function.
 This function, given a path to the image, loads that image, greyscales it and inverts it.
+Also, I've set the threshold for characters to be 190. The reason is so that we don't draw contour over shadows and darker areas that aren't characters.
 Image needs to be inverted for cv2 to be able to find contours where background is black and character is white.
 
 Secondly, we find contours using `find_contours` function.
@@ -38,6 +39,8 @@ I also considered to add MNIST dataset but the current one prove to be okay.
 
 **Important note**: This is far from good, the dataset needs a lot of work and images from different sources. This is just proof of concept so anything that works most of the time is good.
 
+**Note**: In the mean time, since I had more time, I managed to extend the dataset with some images from MNIST. The problem I came across is that most of the 1's are written as "sticks". Am I the only one who doesn't write ones like that? I mean, it's really difficult to come across images of 1's that look literally like 1's. Well, it wouldn't be a problem if we didn't want to classify '/' characters. A LOT of 1's looked like '/' character. So in this new dataset I focused on creating some kind of "gap" between those 2 classes.
+
 ### Model and training
 
 Since the problem isn't too complex, I decided to use a popular Convolutional Neural Network called LeNet-5.
@@ -67,16 +70,28 @@ In total I trained 5 models:
    - Same data and number of epochs as 1. one but I added class weights because of the class imbalance. Same results as the first one.
 
 5. `lenet_25epochs_small_extended.h5`
-   - Trained on the final dataset, hence the extended in the name. I will provide full evaluation results for this one since it's currently the model I use in the main script:
-     - Training loss:
-       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/loss.png?raw=true)
-     - Training accuracy:
-       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/accuracy.png?raw=true)
-     - Test accuracy: 0.930752453653217
-     - Test F1 score, recall and precision over classes:
-       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
-     - Confusion matrix:
-       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
+   - Trained on the 2-datasets combined dataset, hence the extended in the name. Until I came up with the MNIST update this was by far the best model.
+
+**note**: Reffering to the last note, I trained a new model on the final dataset.
+
+6. `lenet_15epochs_small_weighted_extended_refined.h5`
+
+   Just before we move to model description, I'm really sorry for the long name, my naming conventions are terrible.
+
+   Anyways while training this model I noticed a huge mistake I've made. There is no regularization and my model was overfitting like crazy.
+   So this model differs from the last 5 ones in a few ways:
+
+   - I've added a Dropout(0.23) just after second Pooling. Also, after some reading on CNN's I switched activations of Conv layers to tanh which proved to be better.
+
+   - Test accuracy: 0.9568434032059187
+   - Training loss:
+     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/loss.png?raw=true)
+   - Training accuracy:
+     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/accuracy.png?raw=true)
+   - Test F1 score, recall and precision over classes:
+     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
+   - Confusion matrix:
+     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
 
 ## Solver
 
@@ -95,11 +110,28 @@ This project is really simple to setup and use:
 - Clone the repo
 - Run the script using `python main.py path/to/image_containing expression`
 
-I commited an example image to this repo:
-![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test.jpeg?raw=true)
+I commited an some example images to this repo:
 
-and after running `python main.py test.jpeg`, the output is:
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test1.jpg?raw=true)
 
-Decoded expression: 5x(12+3)-1123/7x61
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test2.jpg?raw=true)
 
-Calculated expression: -5211.142857142856
+![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test3.jpg?raw=true)
+
+and after running `python main.py test1.jpg`, the output is:
+
+Decoded expression: 87+95
+
+Calculated expression: 182
+
+`python main.py test2.jpg`:
+
+Decoded expression: 87+95
+
+Calculated expression: 182
+
+`python main.py test3.png`:
+
+Decoded expression: 7x(8/11)
+
+Calculated expression: 5.090909090909091
