@@ -82,16 +82,18 @@ In total I trained 5 models:
    So this model differs from the last 5 ones in a few ways:
 
    - I've added a Dropout(0.23) just after second Pooling. Also, after some reading on CNN's I switched activations of Conv layers to tanh which proved to be better.
+   - Also, I've weighted classes to fight imbalance and focus on samples with bad recall and precision.
 
-   - Test accuracy: 0.9568434032059187
-   - Training loss:
-     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/loss.png?raw=true)
-   - Training accuracy:
-     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/accuracy.png?raw=true)
-   - Test F1 score, recall and precision over classes:
-     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
-   - Confusion matrix:
-     ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
+   - Results are the following:
+     - Test accuracy: 0.9568434032059187
+     - Training loss:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/loss.png?raw=true)
+     - Training accuracy:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/accuracy.png?raw=true)
+     - Test F1 score, recall and precision over classes:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/f1_prec_rec.png?raw=true)
+     - Confusion matrix:
+       ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/cm.png?raw=true)
 
 ## Solver
 
