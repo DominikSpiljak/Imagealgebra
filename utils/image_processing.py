@@ -11,7 +11,7 @@ def load_and_process_image(image):
     Returns:
         np.ndarray: np.ndarray representation of the image
     """
-    threshold = 190
+    threshold = 240
     img = image
     if type(image) == str:
         img = cv.imread(image)
