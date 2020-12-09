@@ -43,6 +43,9 @@ I also considered to add MNIST dataset but the current one prove to be okay.
 
 ### Model and training
 
+I extraced features from images using `Extraction.ipynb`, saved them to `small_data_refined.npz` and trained the model using `Train.ipynb`.
+All models are saved to `models/` folder.
+
 Since the problem isn't too complex, I decided to use a popular Convolutional Neural Network called LeNet-5.
 
 It's relatively simple:
