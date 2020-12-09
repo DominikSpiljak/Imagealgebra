@@ -115,7 +115,7 @@ This project is really simple to setup and use:
 - Clone the repo
 - Run the script using `python decode_and_calculate.py path/to/image_containing_expression`
 
-I commited an some example images to this repo:
+I commited some example images to this repo:
 
 ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/test1.jpg?raw=true)
 
