@@ -158,3 +158,5 @@ After an image is built just run it using:
 `docker run -d --name imagealgebra --device /dev/video0 -p 8080:8080 imagealgebra:1.0`
 
 and open `http://0.0.0.0:8080/` in your browser.
+
+**Note** After you are done using the web app, I suggest you kill the container because the camera might remain on.
