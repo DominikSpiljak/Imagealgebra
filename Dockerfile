@@ -1,7 +1,7 @@
 FROM fedora
 LABEL maintainer="dominik.spiljak@gmail.com"
 
-RUN yum update -y && yum install -y python3 python3-pip make automake gcc g++ python-devel
+RUN yum update -y && yum install -y python3 python3-pip make automake gcc g++ python-devel python3-h5py
 
 COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
