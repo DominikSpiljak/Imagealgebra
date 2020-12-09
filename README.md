@@ -100,7 +100,7 @@ In total I trained 5 models:
 
 ## Solver
 
-Solver is relatively simple and is found in `main.py` as `evaluate_expression`.
+Solver is relatively simple and is found in `decode_and_calculate.py` as `evaluate_expression`.
 The idea is to use two stacks, one is for operators and one is for number values.
 
 We iterate through expression and store numbers into value stack.
