@@ -81,7 +81,7 @@ In total I trained 5 models:
    Anyways while training this model I noticed a huge mistake I've made. There is no regularization and my model was overfitting like crazy.
    So this model differs from the last 5 ones in a few ways:
 
-   - I've added a Dropout(0.23) just after second Pooling. Also, after some reading on CNN's I switched activations of Conv layers to tanh which proved to be better.
+   - I've added a Dropout(0.23) just after second Pooling. Also, after some reading on CNN's I switched activations of Conv layers from relu to tanh which proved to be better.
    - Also, I've weighted classes to fight imbalance and focus on samples with bad recall and precision.
 
    - Results are the following:
