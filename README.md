@@ -110,7 +110,7 @@ When we get to the end of the expression, apply remaining operators and the solu
 This project is really simple to setup and use:
 
 - Clone the repo
-- Run the script using `python decode_and_calculate.py path/to/image_containing expression`
+- Run the script using `python decode_and_calculate.py path/to/image_containing_expression`
 
 I commited an some example images to this repo:
 
@@ -145,6 +145,8 @@ Also, I have created a web app using Flask with simple UI:
 ![alt text](https://github.com/DominikSpiljak/Imagealgebra/blob/main/readme_images/webapp_screen.png?raw=true)
 
 If you want to run it locally, just run `python app.py` and open `http://0.0.0.0:8080/` in your browser.
+
+**Note** The issue with this one is that you can only use the camera of the device running this script so it's kind of difficult to get the right angle and lighting for the best results. In order to use the client-side camera, I found a way but it included using a HTML embedded Javascript, it took me a lot of trial and errors to realize I can't write Javascript. My suggestion is to take the picture with your phone, upload it locally and run `python decode_and_calculate.py path/to/image_containing_expression`
 
 ## Docker image
 
