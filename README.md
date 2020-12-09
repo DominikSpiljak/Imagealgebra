@@ -153,6 +153,6 @@ There is a Dockerfile which you can use to build an image by positioning in the 
 `sudo docker build --tag imagealgebra:1.0 .`
 
 After an image is built just run it using:
-`docker run -d --name cam --device /dev/video0 -p 8080:8080 imagealgebra:1.0`
+`docker run -d --name imagealgebra --device /dev/video0 -p 8080:8080 imagealgebra:1.0`
 
 and open `http://0.0.0.0:8080/` in your browser.
